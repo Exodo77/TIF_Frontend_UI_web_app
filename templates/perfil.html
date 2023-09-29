@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil</title>
+    <link rel="stylesheet" href="../static/styles/perfil.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap">
+</head>
+<body>
+    <div class="rectangulo">Team Hub</div>
+    <h1 id="titulo">Mi perfil:</h1>
+    <div class="background-square0">
+        <img id="userImage" src="{{usuario.imagenURL}}" alt="Imagen de perfil">
+        <p>{{ usuario.nombre }}{{ usuario.apellido }}</p>
+    </div>
+    <div class="background-square"></div>
+    <div class="welcome-header" data-user-id="{{usuario.userID}}">
+        <div class="info-item">
+            <p>Nombre de usuario: {{ usuario.nombreusuario }}</p>
+            <p>Nombre: {{ usuario.nombre }}</p>
+            <p>Apellido: {{ usuario.apellido }}</p>
+            <p>Correo electrónico:{{usuario.correo }}</p>
+            <p>Contraseña: </p>
+            <div id="flashMessage" style="color: rgb(255, 255, 255);"></div> <!-- Elemento para mensajes de flash -->
+        </div>
+        <div class="Buttones">
+            <button id="editarUsuarioButton">Editar</button>
+            <button id="editarNombreButton">Editar</button>
+            <button id="editarApellidoButton">Editar</button>
+            <button id="editarCorreoButton">Editar</button>
+            <button id="editarContraButton">Editar</button>
+        </div>
+    </div>
+
+    <!-- Diálogo emergente para cambiar nombre de usuario -->
+    <div id="nombreusuarioDialog" class="dialog" style="display: none;">
+        <h3>Ingrese el nuevo nombre de usuario</h3>
+        <input type="text" id="userName" placeholder="nombre de usuario">
+        <button id="confirmNombreUsuarioButton">Confirmar</button>
+        <button id="cancelNombreUsuarioButton">Cancelar</button>
+    </div>
+
+    <!-- Diálogo emergente para cambiar nombre -->
+    <div id="nombreDialog" class="dialog" style="display: none;">
+        <h3>Ingrese el nuevo nombre</h3>
+        <input type="text" id="nombreName" placeholder="nombre">
+        <button id="confirmNombreButton">Confirmar</button>
+        <button id="cancelNombreButton">Cancelar</button>
+    </div>
+
+    <!-- Diálogo emergente para cambiar el apellido -->
+    <div id="apellidoDialog" class="dialog" style="display: none;">
+        <h3>Ingrese el nuevo apellido</h3>
+        <input type="text" id="apellidoName" placeholder="apellido">
+        <button id="confirmApellidoButton">Confirmar</button>
+        <button id="cancelApellidoButton">Cancelar</button>
+    </div>
+
+    <!-- Diálogo emergente para cambiar el correo -->
+    <div id="correoDialog" class="dialog" style="display: none;">
+        <h3>Ingrese el nuevo correo</h3>
+        <input type="text" id="correoName" placeholder="correo">
+        <button id="confirmCorreoButton">Confirmar</button>
+        <button id="cancelCorreoButton">Cancelar</button>
+    </div>
+
+    <!-- Diálogo emergente para cambiar la contraseña -->
+    <div id="contraDialog" class="dialog" style="display: none;">
+        <div id="flashMessage" style="color: red;"></div> <!-- Elemento para mensajes de flash -->
+        <h2>Cambiar Contraseña</h2>
+        <h3>Contraseña Actual</h3>
+        <input type="password" id="contrasenaActual" placeholder="Contraseña actual">
+        <h3>Contraseña Nueva</h3>
+        <input type="password" id="nuevaContrasena" placeholder="Nueva contraseña">
+        <button id="confirmContraButton">Confirmar</button>
+        <button id="cancelContraButton">Cancelar</button>
+    </div>
+
+    <script src="../static/perfil.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/style2.css">
+    <link rel="stylesheet" href="../static/styles/register.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap">
     <title>Registro de Usuario</title>
     <!-- Agrega tus estilos CSS o enlaces a bibliotecas de estilos aquí -->
@@ -22,7 +22,7 @@
     <div class="rectangulo">Team Hub</div>
     <div class="background-square"></div>
     <h1>Crea una cuenta</h1>
-    <form method="POST" action="/register">
+    <form id="registration-form">
         <h2>Nombre de usuario</h2>
         <label for="username"></label>
         <input type="text" name="username" required>
@@ -45,7 +45,7 @@
         
         <h2>Fecha de nacimiento</h2>
         <select name="dia" id="dia">
-            <option value="" disabled selected>Dia</option>
+            <option value="" disabled selected>Día</option>
         </select>
         <select name="mes" id="mes">
             <option value="" disabled selected>Mes</option>
@@ -53,9 +53,8 @@
         <select name="anio" id="anio">
             <option value="" disabled selected>Año</option>
         </select>
-        
-        <input type="submit" value="Confirmar">
+        <input type="submit" value="Confirmar" id="submit-button">
     </form>
-    <script src="../static/script.js"></script>
+    <script src="../static/register.js"></script>
 </body>
 </html>

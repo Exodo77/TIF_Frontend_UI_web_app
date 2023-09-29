@@ -3,76 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido</title>
-    <link rel="stylesheet" href="../static/css/welcome.css">
+    <link rel="stylesheet" href="../static/styles/welcome.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap">
+    <title>Bienvenido</title>
 </head>
 <body>
-    <div class="rectangulo">Team Hub</div>
-    {% if no_pertenece_a_servidor %}
-    <!-- Si el usuario no pertenece a ningún servidor, muestra solo dos columnas -->
-    <div class="column" id="servers-column">
-        <!-- Aquí mostrarás la lista de servidores si el usuario pertenece a alguno -->
-        {% if servidores %}
-        <ul>
-            {% for servidor in servidores %}
-                <li>{{ servidor.nombre }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-    
-        <!-- Botón para unirse a un nuevo servidor -->
-        <button class="create-button" onclick="unirseAServidor()"></button>
-    
-        <!-- Botón para crear un nuevo servidor -->
-        <button class="compass-button" onclick="crearNuevoServidor()"></button>
-    </div>
-    
-
-    <div class="column" id="messages-column">
-        <!-- Muestra las columnas de mensajes aquí (derecha) -->
-        <!-- Debes agregar la lógica para cargar los mensajes aquí si es necesario -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
+    <!-- Mostrar mensajes Flash -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <ul class="flash-messages">
                 {% for category, message in messages %}
-                    <li>{{ message }}</li>
+                    <li class="{{ category }}">{{ message }}</li>
                 {% endfor %}
             </ul>
         {% endif %}
-        {% endwith %}
-    </div>
-    {% else %}
-    <!-- Si el usuario pertenece a al menos un servidor, muestra las tres columnas -->
-    <div class="column" id="servers-column">
-    <!-- Aquí mostrarás la lista de servidores si el usuario pertenece a alguno -->
-        {% if servidores %}
-        <ul>
-            {% for servidor in servidores %}
-                <li>{{ servidor.nombre }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+    {% endwith %}
 
-    <!-- Botón para unirse a un nuevo servidor -->
-        <button onclick="unirseAServidor()">Unirse a un nuevo servidor</button>
+    <div class="welcome-header" data-user-id="{{ user_id }}">
+        <a href="/login">Cerrar sesión</a>
+        <a href="/perfil?user_id={{ user_id }}" target="_blank">{{ user_name }}</a>
     </div>
 
-    <div class="column" id="channels-column">
-        <!-- Aquí mostrarás la lista de canales del servidor seleccionado -->
-        <!-- También incluye un botón para crear un nuevo canal -->
-        <!-- Debes agregar la lógica para cargar la lista de canales aquí -->
+    <div id="welcome-content" class="servidores-registrados" data-no-pertenece="{{ no_pertenece_a_servidor }}">
+        <div class="server-container">
+            <!-- Columna 1: Servidores registrados -->
+            <div class="server-column">
+                <ul class="server-list">
+                    {% for servidor in servidores %}
+                    <li class="server-list-item" data-server-id="{{ servidor.serverID }}">{{ servidor.nombre }}</li>
+                    {% endfor %}
+                </ul>
+                <button class="create-server-button">
+                    <img src="../static/imag/btn1.png" alt="Crear servidor">
+                </button>
+                <button class="explore-servers-button">
+                    <img src="../static/imag/btn2.png" alt="Explorar servidores">
+                </button>
+            </div>
+
+            <!-- Columna 2: Canales del servidor (inicialmente oculta) -->
+            <div class="channel-column" style="display: none;">
+                <ul class="channel-list">
+                <!-- Aquí se mostrarán los canales del servidor -->
+                    {% for canal in canales %}
+                    <li class="channel-list-item" data-channel-id="{{canal.canalID }}">#{{ canal.nombre }}</li>
+                    {% endfor %}
+                </ul>
+                <button class="create-channel-button">Crear canal</button>
+            </div>
+
+            <!-- Columna 3: Servidores para explorar (inicialmente oculta) -->
+            <div class="server-column" id="explore-servers-column" style="display: none;">
+                <h2>Explorar nuevos servidores</h2>
+                <ul class="explore-server-list">
+                    <!-- Aquí se mostrarán los servidores no registrados -->
+                </ul>
+            </div>
+
+            <!-- Columna 4: Mensajes del canal (inicialmente oculta) -->
+            <div class="message-column" style="display: none;">
+                <ul class="message-list">
+        <!-- Aquí se mostrarán los mensajes del canal -->
+                </ul>
+
+                <!-- Caja de texto para escribir mensajes -->
+                <textarea id="messageInput" rows="4" placeholder="Envia un mensaje a ......"></textarea>
+    
+                <!-- Botón para enviar mensajes -->
+                <button id="sendMessageButton">
+                    <img src="../static/imag/btn3.png" alt="Enviar">
+                </button>
+
+            </div>
+        </div>
     </div>
 
-    <div class="column" id="messages-column">
-        {% if no_pertenece_a_servidor %}
-        <!-- Si el usuario no pertenece a ningún servidor, muestra el mensaje aquí -->
-        <p>Aún no te has unido a un servidor. Intenta buscar uno o crea uno propio.</p>
-        {% else %}
-        <!-- Si el usuario pertenece a al menos un servidor, muestra los mensajes aquí -->
-        <!-- Debes agregar la lógica para cargar los mensajes aquí si es necesario -->
-        {% endif %}
+    <!-- Diálogo emergente para crear servidor -->
+    <div id="serverDialog" class="dialog" style="display: none;">
+        <h3>Crear un nuevo servidor</h3>
+        <input type="text" id="serverName" placeholder="Nombre del servidor">
+        <button id="confirmDialogButton">Confirmar</button>
+        <button id="cancelDialogButton">Cancelar</button>
     </div>
-    {% endif %}
+
+    <!-- Diálogo emergente para crear canal -->
+    <div id="channelDialog" class="dialog" style="display: none;">
+        <h3>Crear un nuevo canal</h3>
+        <input type="text" id="channelName" placeholder="Nombre del canal">
+        <button id="confirmChannelDialogButton">Confirmar</button>
+        <button id="cancelChannelDialogButton">Cancelar</button>
+    </div>
+
+    <!-- Ventana emergente para unirse al servidor explorado -->
+    <div id="exploreServerDialog" class="dialog" style="display: none;">
+        <h3>Unirse al servidor</h3>
+        <p>¿Quieres unirte al servidor <span id="exploreServerName"></span>?</p>
+        <button id="exploreServerAcceptDialogButton">Aceptar</button>
+        <button id="exploreServerCancelDialogButton">Cancelar</button>
+    </div>
+    <script src="../static/welcome.js"></script>
 </body>
 </html>

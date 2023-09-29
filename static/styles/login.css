@@ -1,4 +1,4 @@
-/* styles.css */
+/*login.css */
 body {
     background-color:  #102c54;
     display: flex;
@@ -43,7 +43,7 @@ input[type="email"], input[type="password"]{
     transform: translate(-50%, -50%); /* Centra el cuadrado */
     width: 600px; /* Ancho del cuadrado */
     height: 350px; /* Alto del cuadrado */
-    background-color: RGB(87, 35, 100); /* Color de fondo (en este caso, azul) */
+    background-color: rgb(87, 35, 100); /* Color de fondo (en este caso, azul) */
     z-index: -1; /* Coloca el cuadrado detrás de todo el contenido */
     border-radius: 30px; /* Todas las esquinas tendrán un radio de 10px */
     border: 3px solid #000; /* Ancho, estilo y color del borde */

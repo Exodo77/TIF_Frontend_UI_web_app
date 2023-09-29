@@ -1,0 +1,270 @@
+/* Estilos para welcome.html */
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color:  #102c54;
+    font-family: 'Space Mono', monospace;
+}
+/*******************************************************ENCABEZADO*******************************************************************/
+.welcome-header {
+    background-color:rgb(87, 35, 100);
+    color: white;
+    padding: 20px;
+    border: 2px solid #000; /* Agrega un borde de 1 píxel de ancho y color negro */
+    box-sizing: border-box; /* Asegura que el borde se incluya en el ancho y alto */
+    display: flex; /* Usa un contenedor flexible para alinear los elementos */
+    justify-content: space-between; /* Distribuye los elementos a los extremos */
+    align-items: center; /* Centra verticalmente los elementos */
+}
+
+.welcome-header a {
+    color: rgb(253, 206, 253);
+    text-decoration: none;
+    font-size: 18px;
+    margin: 0;
+    font-weight: bold; /* Hace que el texto sea en negrita */
+}
+/* Estilo específico para el enlace de "Perfil" */
+.welcome-header a:last-child {
+    margin-left: auto; /* Empuja este enlace hacia la derecha */
+}
+
+/*********************************************************ESTILOS DE LAS COLUMNAS EN LA PAGINA WELCOME HTML******************************************************/
+/* Estilos para las columnas */
+.server-column, .channel-column, .server-column#explore-servers-column,.message-column{
+    float: left;
+    padding: 10px;
+    height: 100%; /* Ajusta la altura según tus necesidades */
+    color: white;
+    font-size: 20px; /* Tamaño de fuente de 14px (ajustable según tus preferencias) */
+    font-weight: bold; /* Hace que el texto sea en negrita */
+    border-right: 2px solid black; /* Agrega un borde derecho de 1px negro */
+    box-sizing: border-box; /* Asegura que el borde se incluya en el ancho y alto */
+}
+.server-column{
+    width: 15%; /* Divide el ancho en 3 para crear tres columnas iguales */
+    text-align: center;
+}
+.server-column#explore-servers-column,.message-column{
+    width: 65%;
+}
+.server-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 15px 0; /* Margen vertical (5px arriba y abajo, 0 a los lados) */
+}
+
+.server-list-item {
+    padding: 10px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Estilo para los botones "Crear servidor" y "Explorar servidores" */
+.create-server-button,
+.explore-servers-button {
+    width: 120px; /* Ancho del botón (ajusta según tus necesidades) */
+    height: 100px; /* Altura del botón (ajusta según tus necesidades) */
+    border: none; /* Sin borde */
+    background-color: transparent; 
+    border-radius: 50%; /* Borde redondeado */
+    cursor: pointer;
+    margin: 5px 0; /* Margen vertical (5px arriba y abajo, 0 a los lados) */
+}
+
+/********************************************************CANALES***************************************************************/
+.channel-column{
+    width: 20%;
+}
+/* Estilo para las imágenes dentro de los botones */
+.create-server-button img,
+.explore-servers-button img {
+    max-width: 100%; /* La imagen se ajustará al tamaño del botón */
+    max-height: 100%; /* La imagen se ajustará al tamaño del botón */
+}
+
+.create-channel-button{
+    float: left;
+    font-family: 'Space Mono', monospace;
+    font-size: 20px; /* Tamaño de fuente de 14px (ajustable según tus preferencias) */
+    text-align: center;
+    font-weight: bold; /* Hace que el texto sea en negrita */
+    background-color: #fefefe;
+    width: 200px; /* Puedes ajustar el valor según lo necesites */
+    border: 3px solid #000; /* Agrega un borde de 1 píxel de ancho y color negro */
+}
+
+
+/* Mensajes flash */
+.flash-messages {
+    list-style-type: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: center;
+}
+
+.success {
+    background-color: #28a745;
+    color: white;
+}
+
+.error {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* Estilos para el diálogo emergente */
+.modal {
+    display: none; /* Oculta el diálogo inicialmente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 1;
+    overflow: auto;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para el diálogo emergente */
+.dialog {
+    display: none;
+    position: fixed;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: RGB(87, 35, 100); /* Color de fondo (en este caso, azul) */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 30px; /* Todas las esquinas tendrán un radio de 10px */
+    border: 3px solid #000; /* Ancho, estilo y color del borde */
+    padding: 20px;
+    max-width: 400px;
+    width: 90%;
+    z-index: 9999;
+}
+
+.dialog h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #fefefe;
+    text-align: center;
+}
+
+.dialog input[type="text"] {
+    width: 100%;
+    max-width: 90%; /* Establece el ancho máximo aquí */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 3px solid #000; /* Ancho, estilo y color del borde */
+    border-radius: 5px;
+}
+
+.dialog button {
+    padding: 10px 20px;
+    background-color: #ffffff;
+    color: rgb(0, 0, 0);
+    border: 3px solid #000; /* Ancho, estilo y color del borde */
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.dialog button:hover {
+    border: 3px solid #000; /* Ancho, estilo y color del borde */
+    color: rgb(0, 0, 0);
+    background-color: #999;
+}
+
+/* Estilo para el botón de "Cancelar" */
+#cancelDialogButton,#confirmDialogButton,#confirmChannelDialogButton,#cancelChannelDialogButton,#exploreServerAcceptDialogButton,#exploreServerCancelDialogButton{
+    background-color: #ffffff;
+    border: 3px solid #000; /* Ancho, estilo y color del borde */
+    font-size: 20px; /* Tamaño de fuente de 14px (ajustable según tus preferencias) */
+    font-weight: bold; /* Hace que el texto sea en negrita */
+
+}
+
+#cancelDialogButton:hover {
+    background-color: #999;
+}
+
+
+/************************************************ESTILOS PARA LOS MENSAJES DE LA COLUMNA 4****************************************************/
+
+/* Estilo para cada sección de mensaje */
+.message-section {
+    margin: 5px 0; /* Espacio entre mensajes */
+}
+/* Estilo para el cuadro de cada mensaje */
+.message-box {
+    border: 2px solid #000000; /* Agrega un borde alrededor de cada mensaje */
+    padding: 2px;
+    background-color: #f5f5f5; /* Cambia el color de fondo de los mensajes */
+    border-radius: 15px; /* Añade bordes redondeados a cada mensaje */
+    width: 700px;
+}
+.message-content{
+    color: rgb(0, 0, 0);
+}
+#sendMessageButton {
+    background-color: transparent; /* Fondo transparente */
+    border: none; /* Sin borde */
+    padding: 0; /* Sin relleno */
+    width: 60px;
+    height: 60px;
+}
+#sendMessageButton img {
+    max-width: 100%; /* Establece el ancho máximo al 100% del tamaño del botón */
+    max-height: 100%; /* Establece la altura máxima al 100% del tamaño del botón */
+    width: auto; /* Para mantener la proporción de aspecto de la imagen */
+    height: auto; /* Para mantener la proporción de aspecto de la imagen */
+}
+#messageInput{
+    width: 700px;
+    height: 40px;
+}
+/* Estilo para el nombre de usuario */
+.message-username {
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    margin-right: 10px; /* Espacio entre el nombre de usuario y la fecha */
+    display: inline-block; /* Coloca el nombre de usuario y la fecha en la misma línea */
+}
+/* Estilo para la fecha de envío */
+.message-date {
+    margin-left: 100px;
+    color: rgb(0, 0, 0);
+    display: inline-block; /* Coloca el nombre de usuario y la fecha en la misma línea */
+}
+
+/* Estilo para el contenido del mensaje */
+.message-content {
+    clear: both; /* Evita que el contenido del mensaje flote alrededor de otros elementos */
+    margin-top: 5px; /* Espacio entre el contenido y otros elementos */
+}

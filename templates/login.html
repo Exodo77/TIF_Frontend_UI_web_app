@@ -4,41 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Proyecto</title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/styles/login.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap">
 </head>
 <body>
     <div class="rectangulo">Team Hub</div>
     <!-- Mostrar mensajes Flash -->
     {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
+        {% if messages %}
+            <ul class="flash-messages">
                 {% for category, message in messages %}
-                    {% if category == 'error' %}
-                        <script>
-                            alert("{{ message }}");
-                        </script>                        
-                    {% endif %}
+                    <li class="{{ category }}">{{ message }}</li>
                 {% endfor %}
-            {% endif %}
-        {% endwith %}
+            </ul>
+        {% endif %}
+    {% endwith %}
     <div class="background-square"></div>
     <h1>Iniciar Sesión</h1>
 
     <!-- Agrega un formulario con method="POST" y action="/login" -->
-    <form method="POST" action="/login">
+    <form id="login-form">
         <h2>Correo Electrónico</h2>
-        <input type="email" id="correo" name="correo" required>
-        
+        <input type="email" id="correo" name="correo" required autocomplete="username">
         <h2>Contraseña</h2>
-        <input type="password" id="contrasena" name="contrasena" required>
+        <input type="password" id="contrasena" name="contrasena" required autocomplete="current-password">
             
-        <!-- Cambia el tipo de input a "submit" para enviar el formulario -->
-        <input type="submit" value="Confirmar">
+        <!-- Cambia el tipo de input a "button" para evitar que el formulario se envíe automáticamente -->
+        <input type="button" value="Confirmar" id="submit-button">
     </form>
     <div class="registro-container">
         <h3>¿No tiene cuenta?</h3>
         <a href="/register">Registrarse</a>
     </div>
+
+    <!-- Agrega la sección para mostrar mensajes de éxito o error si es necesario -->
+    <div id="message-container"></div>
+
+    <!-- Agrega tu script JavaScript al final del archivo -->
+    <script src="../static/logeo.js"></script>
+
 </body>
 </html>
-
